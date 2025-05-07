@@ -59,7 +59,7 @@ export default function LoginForm() {
                     duration: 2000,
                 })
 
-                router.push("/content")
+                router.push("/practise")
                 router.refresh()
             }
         })
