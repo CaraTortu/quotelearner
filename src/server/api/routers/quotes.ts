@@ -6,19 +6,23 @@ import { quotes } from "~/server/db/schema";
 export const quoteRouter = createTRPCRouter({
     addQuote: protectedProcedure
         .input(
-            z.object({
-                text: z.string().nonempty(),
-                theme: z.string().nonempty(),
-            }),
+            z.array(
+                z.object({
+                    text: z.string().nonempty(),
+                    theme: z.string().nonempty(),
+                }),
+            ),
         )
         .mutation(async ({ ctx, input }) => {
             const result = await ctx.db
                 .insert(quotes)
-                .values({
-                    userId: ctx.session.user.id,
-                    text: input.text,
-                    theme: input.theme,
-                })
+                .values(
+                    input.map((i) => ({
+                        userId: ctx.session.user.id,
+                        text: i.text,
+                        theme: i.theme,
+                    })),
+                )
                 .returning();
 
             return { success: result.length > 0 };
