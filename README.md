@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LCComputerScience 
 
-## Getting Started
+This is the repository for the LCComputerScience project. This project is a platform for students to learn computer science and programming. It provides a set of courses, exercises, and projects to help students learn and practice their programming skills for the Leaving Certificate Computer Science course.
 
-First, run the development server:
+## Technologies used! 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Next.js](https://nextjs.org)
+- [BetterAuth](https://better-auth.vercel.app/)
+- [Drizzle](https://orm.drizzle.team)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
+- [React Email](https://react.email/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to run the project locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Requirements:
+    1. Make sure to have a database running. If you don't have one, we provide a script to start the database with docker under the `/scripts` folder. Make sure that after database is created, you run the migrations with `npm run db:push` or `bun run db:push`.
+    2. Make sure you have a `.env` file with the correct fields from the `.env.example` file.
+    3. Create a stripe account and get the keys to fill the `.env` file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Run `npm i` or `bun i` to install the dependencies.
+2. Run `npm run dev` or `bun run dev` to start the project in development mode.
+3. Run `stripe listen --forward-to localhost:3000/api/webhooks` to listen to stripe events.
 
-## Learn More
+## How to build the project
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Run `npm run build` or `bun run build` to build the project.

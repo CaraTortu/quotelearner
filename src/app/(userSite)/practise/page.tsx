@@ -68,7 +68,7 @@ export default function Home() {
     const generateSentence = () => {
 
         // Ensure a different sentence is selected
-        const selectedLine = lines[Math.floor(Math.random() * lines.length)];
+        const selectedLine = lines[Math.floor(Math.random() * lines.length)]!;
 
         const split = selectedLine.split(" ");
         const newWords: WordData[] = split.map((word) => ({
@@ -86,6 +86,10 @@ export default function Home() {
         while (blanks < sentenceMaxWords) {
             const idx = Math.floor(Math.random() * newWords.length);
 
+            if (!newWords[idx]) {
+                continue
+            }
+
             if (!newWords[idx].isBlank && isOnlyLetters(newWords[idx].original)) {
                 newWords[idx].isBlank = true;
                 newWords[idx].userInput = "";
@@ -100,7 +104,7 @@ export default function Home() {
     const updateInput = (index: number, value: string) => {
         if (!words) return;
         const newWords = [...words];
-        newWords[index].userInput = value;
+        newWords[index]!.userInput = value;
         setWords(newWords);
     };
 
@@ -121,7 +125,7 @@ export default function Home() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-black text-white p-4 flex flex-col items-center gap-4">
+        <div className="pt-18 md:pt-4 w-full min-h-svh p-4 flex flex-col items-center gap-4">
             <h1 className="font-bold text-2xl pt-4">Welcome to your King Lear stuff</h1>
             <div className="flex gap-4">
                 <button
