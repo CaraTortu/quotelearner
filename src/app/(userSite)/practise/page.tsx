@@ -4,6 +4,7 @@ import { Button } from "~/app/_components/ui/button";
 import { Input } from "~/app/_components/ui/input";
 
 const lines = [
+    /*
     "I have often blushed to acknowledge him",
     "Yet was his mother fair ; there was good sport at his making and the whoreson must be acknowledged",
     "Know that we have divided in three our kingdom and tis our fast intent",
@@ -47,7 +48,47 @@ const lines = [
     "I did her wrong",
     "I can tell why a snail has a house",
     "Thou shouldst not have been old till thou hadst been wise",
-    "O , let me not be mad , not mad , sweet heaven ! Keep me in temper ; I would not be mad !"
+    "O , let me not be mad , not mad , sweet heaven ! Keep me in temper ; I would not be mad !",
+    */
+
+    // NEW
+    "Have you heard of no likely wars twixt the Dukes of Cornwall and Albany ?",
+    "The Duke be here tonight ! The better ! Best ! This weaves itself perforce into my business .",
+    "Here stood he in the dark , his sharp sword out , mumbling of wicked charms , conjuring the moon to stand auspicious mistress .",
+    "I told him the revenging Gods gainst parricides did all their thunders bend ... With his prepared sword he charges home my unprovided body .",
+    "I will proclaim it that he which finds him shall deserve our thanks , bringing the murderous coward to the stake ; he that conceals him , death .",
+    "Of my land loyal and natural boy , I'll work the means to make thee capable .",
+    "Draw , you rascal ; you come with letters against the king , and take vanity the puppet's part against the royalty of her father .",
+    "A knave , a rascal , an eater of broken meats ; a base proud , shallow , beggarly , three-suited , hundred pound , filthy , worsted stocking knave .",
+    "I have seen better faces in my time than stands on any shoulder that I see before me at this instant .",
+    "Call not your stocks for me ; I serve the king on whose employment I was sent to you ; you shall do small respect , show too bold malice against the grace and person of my master , stocking his messenger .",
+    "The king must take it ill , that he so slightly valu'd in his messenger , should have him thus restrained .",
+    "I'll answer that .",
+    "They durst not do't . They could not , would not do't ; 'tis worse than murder to do upon respect such violent outrage .",
+    "O ! how this mother swells up toward my heart ; Hysterica passio ? Down , thou climbing sorrow ! Let go thy hold when a great wheel runs down a hill , lest it break thy neck with following it .",
+    "Deny to speak with me ! They are sick ! They are weary . They have travelled hard tonight ! Mere fetches , the images and revolt of taking off .",
+    "We are not ourselves when nature , being oppress'd , commands the mind to suffer with the body .",
+    "I would have all well betwixt you .",
+    "Beloved Regan , thy sister's naught .",
+    "I cannot think my sister in the least would fail her obligation ; if sir , perchance she have restrained the riots of your followers , 'tis on such ground and to such wholesome end as clears her from all blame .",
+    "O sir ! You are old ; nature in you stands on the very verge of her confine ; you should be ruled and led by some discretion that discerns your state better that you yourself .",
+    "On my knees I beg that you'll vouchsafe me raiment , bed and food .",
+    "Infect her beauty , you fen-suck'd fogs , drawn by the powerful sun , to fall and blast her pride .",
+    "No Regan , thou shalt never have my curse : thy tender-hefted nature shall not give thee o'er harshness .",
+    "I pray you father , being weak , seem so .",
+    "Return to her ? And fifty men dismiss'd ! No , rather I abjure all roofs , and choose to wage against the enmity of the air .",
+    "I prithee , daughter , do not make me mad .",
+    "I can stay with Regan , I and my hundred knights .",
+    "Not altogether so : I look'd not for you yet , nor am provided for your fit welcome .",
+    "Why might not you , my lord , receive attendance from those that she calls servants , or from mine ?",
+    "Man's life is cheap as beast's .",
+    "You heavens , give me that patience , patience I need .",
+    "A poor old man , as full of grief as age .",
+    "Touch me with noble anger , and let not women's weapons , water-drops , stain my man's cheeks ! No , you unnatural hags , I will have such revenges on you both ...",
+    "'Twill be a storm .",
+    "My lord , entreat him by no means to stay .",
+    "Alack ! The night comes on , and the bleak winds do sorely ruffle , for many miles about there's scarce a bush .",
+    "Shut up your doors , my lord ; 'tis a wild night ."
 ];
 
 
