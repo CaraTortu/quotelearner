@@ -28,10 +28,13 @@ export default async function NavBar() {
                     <Separator orientation="vertical" className="bg-blue-700" />
                 </div>
                 <div className="grow w-full flex items-center font-bold text-sidebar-foreground *:duration-100 gap-12">
-                    {navbarLinks.filter(link => !link.hideIfLoggedIn && !link.adminOnly).map((link) => (
+                    {navbarLinks.filter(link => !link.hideIfLoggedIn && !link.adminOnly && !link.onlyLoggedIn).map((link) => (
                         <Link key={link.url} href={link.url} className="dark:hover:text-gray-300 hover:text-gray-600" prefetch={link.prefetch}>{link.name}</Link>
                     ))}
-                    {!session && navbarLinks.filter(link => link.hideIfLoggedIn).map((link) => (
+                    {!session && navbarLinks.filter(link => link.hideIfLoggedIn && !link.onlyLoggedIn).map((link) => (
+                        <Link key={link.url} href={link.url} className="dark:hover:text-gray-300 hover:text-gray-600" prefetch={link.prefetch}>{link.name}</Link>
+                    ))}
+                    {session && navbarLinks.filter(link => !link.hideIfLoggedIn && link.onlyLoggedIn).map((link) => (
                         <Link key={link.url} href={link.url} className="dark:hover:text-gray-300 hover:text-gray-600" prefetch={link.prefetch}>{link.name}</Link>
                     ))}
                     {session?.user.role === "admin" && navbarLinks.filter(link => link.adminOnly).map((link) => (

@@ -9,7 +9,7 @@ export default async function Home() {
     })
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-[-3rem]">
             <section className="md:mt-[-4rem] w-full h-full min-h-screen bg-linear-to-r from-blue-500 to-green-400 dark:from-blue-800 dark:to-green-600 flex items-center justify-center">
                 <div className="mx-auto text-center text-white flex flex-col gap-2 items-center px-4">
                     <h1 className="text-3xl md:text-5xl font-bold">Ace Your Leaving Certificate Quotes with confidence</h1>

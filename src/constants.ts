@@ -8,6 +8,7 @@ export type NavbarLinkType = {
     name: string;
     url: string;
     hideIfLoggedIn?: boolean;
+    onlyLoggedIn?: boolean;
     adminOnly?: boolean;
     prefetch?: boolean;
 };
@@ -21,10 +22,13 @@ export const navbarLinks: NavbarLinkType[] = [
     {
         name: "Practise",
         url: "/practise",
+        prefetch: false,
     },
     {
         name: "Quote management",
         url: "/quote-management",
+        prefetch: false,
+        onlyLoggedIn: true,
     },
     {
         name: "Sign In",
