@@ -5,6 +5,7 @@ import {
     pgTableCreator,
     text,
     timestamp,
+    uuid,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -38,6 +39,7 @@ export const user = createTable("user", {
 export const usersRelations = relations(user, ({ many }) => ({
     accounts: many(account),
     sessions: many(session),
+    quotes: many(quotes),
 }));
 
 export const session = createTable("session", {
@@ -103,3 +105,23 @@ export const verification = createTable("verification", {
     createdAt: timestamp("created_at"),
     updatedAt: timestamp("updated_at"),
 });
+
+/////////////////
+// Application //
+/////////////////
+
+export const quotes = createTable("quotes", {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    userId: text("userId")
+        .notNull()
+        .references(() => user.id),
+    text: text("text").notNull(),
+    theme: text("theme").notNull(),
+});
+
+export const quotesRelations = relations(quotes, ({ one }) => ({
+    user: one(user, {
+        fields: [quotes.userId],
+        references: [user.id],
+    }),
+}));

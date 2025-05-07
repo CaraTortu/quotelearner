@@ -113,12 +113,15 @@ export default function MobileNav({ session }: { session: Session | null }) {
                 <SheetDescription></SheetDescription>
                 <div className="flex flex-col grow gap-4">
                     <div className="grow flex flex-col gap-4 px-4">
-                        {navbarLinks.filter(link => !link.hideIfLoggedIn && !link.adminOnly).map((link) => (
+                        {navbarLinks.filter(link => !link.hideIfLoggedIn && !link.adminOnly && !link.onlyLoggedIn).map((link) => (
                             <Link key={link.url} href={link.url} className="dark:hover:text-gray-300 hover:text-gray-600" onClick={() => setNavOpen(false)} prefetch={link.prefetch}>
                                 {link.name}
                             </Link>
                         ))}
-                        {!session && navbarLinks.filter(link => link.hideIfLoggedIn && !link.adminOnly).map((link) => (
+                        {!session && navbarLinks.filter(link => link.hideIfLoggedIn && !link.adminOnly && !link.onlyLoggedIn).map((link) => (
+                            <Link key={link.url} href={link.url} className="dark:hover:text-gray-300 hover:text-gray-600" onClick={() => setNavOpen(false)} prefetch={link.prefetch}>{link.name}</Link>
+                        ))}
+                        {session && navbarLinks.filter(link => !link.hideIfLoggedIn && !link.adminOnly && link.onlyLoggedIn).map((link) => (
                             <Link key={link.url} href={link.url} className="dark:hover:text-gray-300 hover:text-gray-600" onClick={() => setNavOpen(false)} prefetch={link.prefetch}>{link.name}</Link>
                         ))}
                         {session?.user.role === "admin" && path.startsWith("/admin") && (

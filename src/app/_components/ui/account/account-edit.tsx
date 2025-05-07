@@ -141,7 +141,7 @@ export default function AccountEdit({ user }: AccountEditProps) {
                         )}
                     />
 
-                    <div className="flex gap-2 pt-2">
+                    <div className="flex gap-2 pt-2 flex-wrap">
                         <Button type="submit" className="flex gap-2">
                             <UserPenIcon />
                             Update account

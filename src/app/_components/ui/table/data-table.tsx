@@ -26,6 +26,7 @@ import { useState } from "react"
 import { Input } from "../input"
 import { DataTablePagination } from "./table-pagination"
 import { DataTableViewOptions } from "./table-col-toggle"
+import { Search } from "lucide-react"
 
 function TableContentFallback({ columnsN }: { columnsN: number }) {
     return (
@@ -97,14 +98,15 @@ export function DataTable<TData, TValue>({
         <>
             <div className="flex w-full">
                 {searchBox && (
-                    <div className="mb-4">
+                    <div className="relative mb-4">
+                        <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             placeholder={`Search...`}
                             value={globalFilter}
                             onChange={(event) =>
                                 table.setGlobalFilter(String(event.target.value))
                             }
-                            className="max-w-sm"
+                            className="max-w-sm pl-8 w-full"
                         />
                     </div>
                 )}
