@@ -127,13 +127,14 @@ export default function QuotesPage() {
                                     placeholder="Enter the quote text"
                                     value={newQuote.text}
                                     onChange={(e) => setNewQuote({ ...newQuote, text: e.target.value })}
+                                    required
                                 />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="theme">Theme/Source</Label>
                                 <div className="space-y-2">
                                     {!isAddingNewTheme ? (
-                                        <Select value={newQuote.theme} onValueChange={handleThemeChange}>
+                                        <Select value={newQuote.theme} onValueChange={handleThemeChange} required>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select a theme" className="cursor-pointer" />
                                             </SelectTrigger>
@@ -171,7 +172,7 @@ export default function QuotesPage() {
                             >
                                 Cancel
                             </Button>
-                            <Button onClick={addQuote}>Add Quote</Button>
+                            <Button onClick={addQuote} disabled={newQuote.text === "" || (isAddingNewTheme ? newThemeText : newQuote.theme) === ""}>Add Quote</Button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
