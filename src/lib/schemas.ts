@@ -63,7 +63,7 @@ export const registrationSchema = z.object({
  * Schema for updating users
  */
 export const updateUserSchema = z.object({
-    id: z.string().uuid("Invalid user ID"),
+    id: z.string().nonempty("ID is required"),
     name: z.string().nonempty("Name is required"),
     email: z.string().email("Invalid email address"),
     emailVerified: z.boolean(),

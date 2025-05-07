@@ -211,7 +211,6 @@ export function UserEdit({ user }: { user: DBUser }) {
     });
 
     const onSubmit = async (data: UpdateUserSchema) => {
-        console.log(data)
         const result = await userEditMutation.mutateAsync(data);
 
         if (result.success) {

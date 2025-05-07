@@ -4,7 +4,7 @@ import { authClient } from "~/lib/auth-client"
 import { Button } from "../button"
 
 
-export default function GoogleSignin() {
+export default function GoogleSignin({ text }: { text: string }) {
 
     const loginGoogle = async () => {
         await authClient.signIn.social({
@@ -20,7 +20,7 @@ export default function GoogleSignin() {
                     fill="currentColor"
                 />
             </svg>
-            Login with Google
+            {text} with Google
         </Button>
     )
 }
