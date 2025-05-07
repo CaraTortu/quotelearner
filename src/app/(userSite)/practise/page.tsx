@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { Button } from "~/app/_components/ui/button";
+import { Input } from "~/app/_components/ui/input";
 
 const lines = [
     "I have often blushed to acknowledge him",
@@ -128,52 +130,51 @@ export default function Home() {
         <div className="pt-18 md:pt-4 w-full min-h-svh p-4 flex flex-col items-center gap-4">
             <h1 className="font-bold text-2xl pt-4">Welcome to your King Lear stuff</h1>
             <div className="flex gap-4">
-                <button
+                <Button
                     onClick={generateSentence}
-                    className="px-4 py-2 bg-orange-400 hover:bg-orange-300 rounded-lg duration-150"
+                    variant="secondary"
                 >
                     Generate sentence!
-                </button>
-                <input type="number" value={maxWordsFactor} onChange={(e) => setMaxWordsFactor(parseInt(e.target.value))} />
+                </Button>
+                <Input type="number" value={maxWordsFactor} onChange={(e) => setMaxWordsFactor(parseInt(e.target.value))} />
             </div>
 
             {words && (
                 <>
-                    <div className="flex flex-wrap gap-2 text-xl">
+                    <div className="flex flex-wrap text-xl">
                         {words.map((word, idx) =>
                             word.isBlank ? (
-                                <input
+                                <Input
                                     key={idx}
                                     value={word.userInput}
                                     onChange={(e) => updateInput(idx, e.target.value)}
-                                    className={`px-2 py-1 rounded text-black w-32 text-center ${word.isCorrect === true
-                                        ? "bg-green-300"
+                                    className={`w-32 h-8 mb-1 text-center ml-2 ${word.isCorrect
+                                        ? "bg-green-300 dark:bg-green-600"
                                         : word.isCorrect === false
-                                            ? "bg-red-300"
-                                            : "bg-white"
+                                            ? "bg-red-300 dark:bg-red-500"
+                                            : "bg-white dark:bg-gray-500"
                                         }`}
                                 />
                             ) : (
-                                <span key={idx}>{word.original}</span>
+                                <span key={idx} className={isOnlyLetters(word.original) ? "pl-2" : ""}>{word.original}</span>
                             )
                         )}
                     </div>
 
-                    <button
+                    <Button
                         onClick={checkAnswers}
-                        className="px-4 py-2 bg-blue-400 hover:bg-blue-300 rounded-lg duration-150"
                     >
                         Check Answers
-                    </button>
+                    </Button>
                 </>
             )}
 
             {showOriginal && words && (
                 <div className="mt-6 text-lg">
-                    <p className="italic text-green-200">Original sentence:</p>
+                    <p className="italic font-bold font-lexend">Original sentence:</p>
                     <div className="flex flex-wrap gap-2 font-mono text-xl">
                         {words.map((word, idx) => {
-                            let color = "text-white";
+                            let color = "";
                             if (word.isBlank) {
                                 color = word.isCorrect ? "text-green-400" : "text-red-400";
                             }
