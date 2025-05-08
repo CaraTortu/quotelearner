@@ -63,4 +63,34 @@ export const quoteRouter = createTRPCRouter({
 
             return { success: rowCount === input.length };
         }),
+
+    /*
+     * PRACTISE
+     */
+
+    getQuotesByTheme: protectedProcedure.query(async ({ ctx }) => {
+        const result = await ctx.db.query.quotes.findMany({
+            where: eq(quotes.userId, ctx.session.user.id),
+            columns: {
+                userId: false,
+                id: false,
+            },
+        });
+
+        // Tranform data structure
+        const quotesByTheme = new Map<string, string[]>();
+
+        for (const quote of result) {
+            if (!quotesByTheme.has(quote.theme)) {
+                quotesByTheme.set(quote.theme, []);
+            }
+
+            quotesByTheme.set(quote.theme, [
+                ...quotesByTheme.get(quote.theme)!,
+                quote.text,
+            ]);
+        }
+
+        return { success: true, quotesByTheme };
+    }),
 });

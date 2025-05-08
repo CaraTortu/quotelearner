@@ -23,6 +23,7 @@ export const navbarLinks: NavbarLinkType[] = [
         name: "Practise",
         url: "/practise",
         prefetch: false,
+        onlyLoggedIn: true,
     },
     {
         name: "Quote management",

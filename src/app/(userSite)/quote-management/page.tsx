@@ -144,8 +144,10 @@ export default function QuotesPage() {
 
     return (
         <div className="container mx-auto py-6 px-4 grow">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-center pb-8">
                 <h1 className="text-2xl font-bold">Quote Collection</h1>
+            </div>
+            <div className="flex justify-between items-center mb-6">
                 <div className="flex gap-2 flex-wrap">
                     <Dialog open={addNewQuoteOpen} onOpenChange={setAddNewQuoteOpen}>
                         <DialogTrigger asChild>
