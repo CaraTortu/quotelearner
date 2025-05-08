@@ -4,8 +4,15 @@ import { useMemo } from "react";
 import { type ColumnDef } from "@tanstack/react-table"
 import { DataTable } from "../table/data-table";
 import { Button } from "~/app/_components/ui/button"
-import { ArrowUpDown, Pencil, Trash2 } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { Badge } from "../badge";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "../dropdown-menu"
 
 export type ThemeColumn = {
     id: string;
@@ -48,33 +55,49 @@ const getColumns: (params: PassThroughProps) => ColumnDef<ThemeColumn>[] = ({ on
     },
     {
         id: "actions",
+        header: () => <div className="text-right whitespace-nowrap">Actions</div>,
         cell: ({ row }) => {
             const quote = row.original
 
             return (
-                <div className="flex justify-end gap-2">
-                    <Button
-                        variant="destructive"
-                        size="icon"
-                        onClick={() => onDelete(quote.id)}
-                        aria-label="Delete quote"
-                    >
-                        <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive" />
-                    </Button>
-                    <Button
-                        size="icon"
-                        onClick={() => onEdit(quote.id)}
-                        aria-label="Practice quote"
-                    >
-                        <Pencil className="h-4 w-4 text-muted-foreground" />
-                    </Button>
+                <div className="flex justify-end">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <div className="flex flex-col gap-2">
+                                <Button
+                                    className="flex cursor-pointer w-full gap-2"
+                                    onClick={() => onEdit(quote.id)}
+                                >
+                                    <Pencil className="h-4 w-4" />
+                                    <span>Edit</span>
+                                </Button>
+                                <Button
+                                    onClick={() => onDelete(quote.id)}
+                                    className="flex cursor-pointer gap-2"
+                                    variant="destructive"
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                    <span>Delete</span>
+                                </Button>
+                            </div>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             )
         },
+        size: 50, // Reduced width for actions column since we're using a dropdown
     },
 ];
 
-export function TableThemes({ themes, isPending, ...passthrough }: { themes: ThemeColumn[], isPending: boolean } & PassThroughProps) {
+export function TableThemes({ themes, isPending, onDeleteAll, ...passthrough }: { themes: ThemeColumn[], isPending: boolean, onDeleteAll: (rows: ThemeColumn[]) => void } & PassThroughProps) {
     const columns = useMemo(() => getColumns(passthrough), [passthrough])
 
     return (
@@ -87,6 +110,23 @@ export function TableThemes({ themes, isPending, ...passthrough }: { themes: The
                 pageIndex: 0,
                 pageSize: 10,
             }}
+            onRowsAction={(rows, action) => {
+                switch (action) {
+                    case "delete":
+                        onDeleteAll(rows)
+                }
+            }}
+            rowActions={[
+                {
+                    label: "Delete",
+                    action: "delete",
+                    icon: <Trash2 className="h-4 w-4" />,
+                    variant: "destructive",
+                    confirmationTitle: "Delete Selected Quotes",
+                    confirmationDescription:
+                        "Are you sure you want to delete {count} selected quote(s)? This action cannot be undone.",
+                },
+            ]}
         />
     )
 }
