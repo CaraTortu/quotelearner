@@ -166,6 +166,7 @@ export default function QuotesPage() {
                                     <Label htmlFor="quote-text">Quote(s): {newQuote.text.split("\n").filter(s => s.trim() !== "").length}</Label>
                                     <Textarea
                                         id="quote-text"
+                                        className="overflow-scroll-y resize-none h-80 md:resize-y"
                                         placeholder="Enter the quote text. If you want to add multiple quotes, you can add them in different lines"
                                         value={newQuote.text}
                                         onChange={(e) => setNewQuote({ ...newQuote, text: e.target.value })}
