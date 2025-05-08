@@ -70,15 +70,16 @@ export default function QuotesPage() {
         setActiveTheme(theme)
     }, [])
 
-    const addQuoteMutation = api.quotes.addQuote.useMutation()
+    const addQuoteMutation = api.quotes.addQuotes.useMutation()
     const addQuote = async () => {
         const themeToUse = isAddingNewTheme ? newThemeText : newQuote.theme
 
         if (newQuote.text && themeToUse) {
-            await addQuoteMutation.mutateAsync([{
-                text: newQuote.text,
+            await addQuoteMutation.mutateAsync(newQuote.text.split("\n").map(s => ({
+                text: s.trim(),
                 theme: themeToUse
-            }])
+            })).filter(s => s.text !== ""))
+
             await quoteQuery.refetch()
 
             setNewQuote({ text: "", theme: "" })
@@ -91,9 +92,9 @@ export default function QuotesPage() {
         }
     }
 
-    const deleteQuoteMutation = api.quotes.deleteQuote.useMutation()
+    const deleteQuoteMutation = api.quotes.deleteQuotes.useMutation()
     const deleteQuote = useCallback(async (id: string) => {
-        const result = await deleteQuoteMutation.mutateAsync({ id })
+        const result = await deleteQuoteMutation.mutateAsync([{ id }])
 
         if (result.success) {
             setQuotes(quotes.filter((quote) => quote.id !== id))
@@ -103,6 +104,23 @@ export default function QuotesPage() {
         } else {
             toast({
                 title: "Quote deletion failed. Try again later..."
+            })
+        }
+    }, [deleteQuoteMutation, quotes, toast])
+
+    const deleteMultipleQuotes = useCallback(async (ids: { id: string }[]) => {
+        const result = await deleteQuoteMutation.mutateAsync(ids)
+        const ids_mp = ids.map(id => id.id)
+
+        if (result.success) {
+            setQuotes(quotes.filter((quote) => !ids_mp.includes(quote.id)))
+
+            toast({
+                title: "Quotes deleted successfully!"
+            })
+        } else {
+            toast({
+                title: "Quotes deletion failed. Try again later..."
             })
         }
     }, [deleteQuoteMutation, quotes, toast])
@@ -126,8 +144,10 @@ export default function QuotesPage() {
 
     return (
         <div className="container mx-auto py-6 px-4 grow">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-center pb-8">
                 <h1 className="text-2xl font-bold">Quote Collection</h1>
+            </div>
+            <div className="flex justify-between items-center mb-6">
                 <div className="flex gap-2 flex-wrap">
                     <Dialog open={addNewQuoteOpen} onOpenChange={setAddNewQuoteOpen}>
                         <DialogTrigger asChild>
@@ -143,10 +163,10 @@ export default function QuotesPage() {
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="quote-text">Quote</Label>
+                                    <Label htmlFor="quote-text">Quote(s): {newQuote.text.split("\n").filter(s => s.trim() !== "").length}</Label>
                                     <Textarea
                                         id="quote-text"
-                                        placeholder="Enter the quote text"
+                                        placeholder="Enter the quote text. If you want to add multiple quotes, you can add them in different lines"
                                         value={newQuote.text}
                                         onChange={(e) => setNewQuote({ ...newQuote, text: e.target.value })}
                                         required
@@ -289,7 +309,13 @@ export default function QuotesPage() {
                 isMobile ? (
                     <QuoteCards quotes={filteredQuotes} onDelete={deleteQuote} onEdit={(id) => console.log(id)} />
                 ) : (
-                    <TableThemes isPending={quoteQuery.isLoading} themes={filteredQuotes} onDelete={deleteQuote} onEdit={(id) => console.log(id)} />
+                    <TableThemes
+                        isPending={quoteQuery.isLoading}
+                        themes={filteredQuotes}
+                        onDelete={deleteQuote}
+                        onDeleteAll={(rows) => deleteMultipleQuotes(rows.map(r => ({ id: r.id })))}
+                        onEdit={(id) => console.log(id)}
+                    />
                 )
             }
         </div >
