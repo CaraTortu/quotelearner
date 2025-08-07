@@ -9,8 +9,6 @@ This site helps students practise quotes!
 - [Drizzle](https://orm.drizzle.team)
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
-- [React Email](https://react.email/)
-
 ## How to run the project locally
 
 - Requirements:
