@@ -1,6 +1,6 @@
-# LCComputerScience 
+# QuoteLearner 
 
-This is the repository for the LCComputerScience project. This project is a platform for students to learn computer science and programming. It provides a set of courses, exercises, and projects to help students learn and practice their programming skills for the Leaving Certificate Computer Science course.
+This site helps students practise quotes!
 
 ## Technologies used! 
 
